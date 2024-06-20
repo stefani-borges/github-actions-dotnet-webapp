@@ -1,8 +1,6 @@
 name: github-actions .NET
 
-#código utilizado para teste
-
-name: .NET Build and Test
+#código utilizado para teste retirado do perfil Bugs.dat
 
 on:
   push:
