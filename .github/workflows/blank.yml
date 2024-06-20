@@ -1,37 +1,27 @@
 name: github-actions .NET
 
-#código utilizado para teste retirado do perfil Bugs.dat
+#código utilizado para teste retirado do discussions do GitHub4Women - Código do Junior
 
 on:
-  push:
-    branches:
-      - main
-  schedule:
-    - cron: '0 * * * *' # Executa a cada hora
+push:
+branches: [ "main" ]
+pull_request:
+branches: [ "main" ]
+schedule:
+- cron: '0 0 * * 1'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+build:
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+runs-on: ubuntu-latest
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '7.0.x'
-
-    - name: Restore dependencies
-      run: dotnet restore github4women/github4women.csproj
-
-    - name: Build project
-      run: dotnet build github4women/github4women.csproj --configuration Release --no-restore
-
-    - name: Run tests
-      run: dotnet test github4women/github4women.csproj --no-restore --verbosity normal
-
-    - name: Custom script example
-      run: |
-        echo "Executing custom script"
-        # Adicione seus comandos personalizados aqui
+steps:
+- uses: actions/checkout@v4
+- name: Setup .NET
+  uses: actions/setup-dotnet@v4
+  with:
+    dotnet-version: 8.0.x
+- name: Restore dependencies
+  run: dotnet restore **/*.csproj
+- name: Build
+  run: dotnet build **/*.csproj --no-restore
